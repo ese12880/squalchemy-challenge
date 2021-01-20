@@ -49,7 +49,7 @@ def welcome():
 
 @app.route("/api/v1.0/precipitation")
 def precipitation():
-    # Create our session (link) from Python to the DB
+    # Create our session 
     session = Session(engine)
 
     """Return a list of all precipitation and date"""
@@ -69,7 +69,7 @@ def precipitation():
 
 @app.route("/api/v1.0/stations")
 def stations():
-    # Create our session (link) from Python to the DB
+    # Create our session 
     session = Session(engine)
 
     """Return a list of all stations"""
@@ -90,7 +90,7 @@ def stations():
 
 @app.route("/api/v1.0/tobs")
 def tempartureobs():
-    # Create our session (link) from Python to the DB
+    # Create our session 
     session = Session(engine)
 
     """Return a list of all temparture observation"""
@@ -99,7 +99,7 @@ def tempartureobs():
     str_date=list(np.ravel(results_date))[0]
     latest_date=dt.datetime.strptime(str_date,"%Y-%m-%d")
     year_back=latest_date-dt.timedelta(days=366)
-# Perform a query to retrieve the data and precipitation scores
+# Perform a query to retrieve the data and precipitation 
     results=session.query(Measurement.date, Measurement.tobs).order_by(Measurement.date.desc()).\
             filter(Measurement.date>=year_back).all()
     session.close()
@@ -111,8 +111,7 @@ def tempartureobs():
         all_temperature.append(tobs_dict)
     return jsonify(all_temperature)
 
-# This function called `calc_temps` will accept start date and end date in the format '%Y-%m-%d' 
-# and return the minimum, average, and maximum temperatures for that range of dates
+
 @app.route("/api/v1.0/<start>/<end>")
 def calc_temps(start, end):
     # Create our session (link) from Python to the DB
@@ -138,7 +137,7 @@ def calc_temps(start, end):
 
 @app.route("/api/v1.0/<start>")
 def calc_temps_sd(start):
-    # Create our session (link) from Python to the DB
+    # Create our session 
     session = Session(engine)
     """TMIN, TAVG, and TMAX for a list of dates.
     
