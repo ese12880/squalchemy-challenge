@@ -1,1 +1,0 @@
-# squalchemy-challenge
